@@ -1,0 +1,32 @@
+{
+    "name": "jason-gao/beanstalkUsing",
+    "description": "beanstalkUsing",
+    "homepage": "https://github.com/jason-gao/beanstalkUsing",
+    "keywords": ["beanstalk"],
+    "type": "library",
+    "authors": [
+        {
+            "name": "jasong",
+            "email": "3048789891@qq.com",
+            "role": "Development"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.1",
+        "davidpersson/beanstalk": "^2.0",
+        "monolog/monolog": "~1.12"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": ">=4.0.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "beanstalkUsing\\": "src/"
+        },
+        "files": []
+    },
+
+    "minimum-stability": "dev"
+}
