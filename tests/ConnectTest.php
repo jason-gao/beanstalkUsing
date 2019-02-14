@@ -7,6 +7,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase {
 
 	public $subject;
 
+	//https://phpunit.readthedocs.io/zh_CN/latest/fixtures.html#setup-teardown
 	protected function setUp() {
 		$host = 'test.yundun.com';
 		$port = '11300';

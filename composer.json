@@ -14,7 +14,8 @@
     "require": {
         "php": ">=5.4.1",
         "davidpersson/beanstalk": "^2.0",
-        "monolog/monolog": "~1.12"
+        "monolog/monolog": "~1.12",
+        "jason-gao/library": "v1.0.0"
     },
 
     "require-dev": {
@@ -28,5 +29,10 @@
         "files": []
     },
 
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "config": {
+        "process-timeout":      600,
+        "preferred-install":    "dist",
+        "github-protocols":     ["https"]
+    }
 }
