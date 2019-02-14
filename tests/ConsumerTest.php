@@ -29,10 +29,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         $beanstalkConsumer->deleteAllJob();
     }
 
-    /**
-     * @test 跑测试
-     *
-     */
+
     public function listTubeStatus()
     {
         $beanstalkConsumer = new BeanstalkConsumer();
@@ -44,6 +41,14 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
     {
         $beanstalkConsumer = new BeanstalkConsumer();
         $beanstalkConsumer->stats();
+    }
+
+    /**
+     * @test
+     */
+    public function monitorTube(){
+        $beanstalkConsumer = new BeanstalkConsumer();
+        $beanstalkConsumer->monitorTubeStatus();
     }
 }
 
