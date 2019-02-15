@@ -16,7 +16,7 @@ class BeanstalkClient
 
     public static function getInstance($options)
     {
-        $options['logger'] = Log::getInstance();
+//        $options['logger'] = Log::getInstance();
         if (!isset(self::$beanstalk) || !is_object(self::$beanstalk)) {
             self::$beanstalk = new Client($options);
         }

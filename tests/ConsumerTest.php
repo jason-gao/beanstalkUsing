@@ -44,12 +44,35 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @test
+     * tailf /tmp/testLog.log
      */
-    public function monitorTube(){
+    public function monitorTube()
+    {
         $beanstalkConsumer = new BeanstalkConsumer();
         $beanstalkConsumer->monitorTubeStatus();
     }
+
+    /**
+     * @test
+     */
+    public function monitorImpl()
+    {
+        $options           = [
+            'host' => 'test.yundun.com'
+        ];
+        $monitorConf       = [
+            'frequency'       => 10,
+            'tubeMax'         => 100,
+            'noticeFrequency' => 600,
+            'monitor'         => ['default', 'test-pro1', 'test-pro2'],
+            'log'             => true,
+            'log_name'        => 'test',
+            'log_file'        => '/tmp/monitor_beanstalk_tube.log'
+        ];
+        $beanstalkConsumer = new BeanstalkMonitorImpl($options, $monitorConf);
+        $beanstalkConsumer->monitor();
+    }
+
 }
 
 ?>
