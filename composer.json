@@ -15,7 +15,8 @@
         "php": ">=5.4.1",
         "davidpersson/beanstalk": "^2.0",
         "monolog/monolog": "~1.12",
-        "jason-gao/library": "v1.0.0"
+        "jason-gao/library": "v1.0.0",
+        "phpmailer/phpmailer": "v6.0.7"
     },
 
     "require-dev": {

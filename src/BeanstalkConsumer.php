@@ -154,13 +154,26 @@ class BeanstalkConsumer
         $beanstalk->connect();
 
         $status          = []; //监控结果
-        $frequency       = 30; //监控频率/s
+        $frequency       = 3; //监控频率/s
         $buffer          = 2; //保留2次结果
         $tubeMax         = 100; //tube最大数
         $dividingLine    = "\n\n==================\n\n";
         $noticeFrequency = 600; //通知频率 /s
         $notice          = []; //记录每个tube最后一次通知时间
         $monitor         = ['test-pro1', 'test-pro2']; //指定监控tube
+
+        $from     = '3048789891@qq.com';
+        $fromName = '监控队列告警';
+        $to       = ['xx@yundun.com'];
+        $config   = [
+            'SMTPDebug'  => 2,
+            'Host'       => 'smtp.qq.com',
+            'SMTPAuth'   => true,
+            'Username'   => '3048789891@qq.com',
+            'Password'   => '',
+            'SMTPSecure' => 'ssl',
+            'Port'       => 465,
+        ];
 
         while (true) {
             $tubes = $beanstalk->listTubes();
@@ -191,8 +204,16 @@ class BeanstalkConsumer
                             //发送通知
                             if (!isset($notice[$tube]) || (time() - $notice[$tube]) > $noticeFrequency) {
                                 Log::getInstance()->alert("send notice");
-                                $notice[$tube] = time();
-                                Log::getInstance()->Info("notice tube time:" . $notice[$tube]);
+                                $mail = new SendMail($config);
+                                $mail->sendMail($from, $fromName, $to, '队列告警', "tube:{$tube}异常,ready job:{$ts[1]['current-jobs-ready']}");
+                                if ($noticeError = $mail->getError()) {
+                                    Log::getInstance()->Error("notice fail:" . $noticeError);
+                                } else {
+                                    $notice[$tube] = time();
+                                }
+                                if (isset($notice[$tube])) {
+                                    Log::getInstance()->Info("notice tube time:" . $notice[$tube]);
+                                }
                             }
                             Log::getInstance()->alert($dividingLine);
                         }
