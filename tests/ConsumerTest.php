@@ -23,10 +23,17 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         $beanstalkConsumer->deleteBuriedJob();
     }
 
+    /**
+     * @test
+     */
     public function deleteAllJob()
     {
         $beanstalkConsumer = new BeanstalkConsumer();
-        $beanstalkConsumer->deleteAllJob();
+        $tubes = [
+            'new_mailsend',
+            'new_smssend'
+        ];
+        $beanstalkConsumer->deleteAllJob($tubes);
     }
 
 
@@ -53,7 +60,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @test
+     *
      */
     public function monitorImpl()
     {

@@ -95,10 +95,25 @@ class BeanstalkConsumer
     }
 
 
-    public function deleteAllJob()
+    public function deleteAllJob($tubes = [])
     {
         $beanstalk = BeanstalkClient::getInstance(['host' => 'test.yundun.com']);
         $beanstalk->connect();
+
+        if ($tubes) {
+            foreach ($tubes as $t) {
+                $beanstalk->watch($t);
+                while (true) {
+                    $job = $beanstalk->reserve(2); // Block until job is available.
+                    if (!$job) {
+                        var_dump("ready job empty");
+                        break;
+                    }
+                    var_dump($job);
+                    $beanstalk->delete($job['id']);
+                }
+            }
+        }
 
         for ($i = 1; $i < 10; $i++) {
             $beanstalk->watch('test-pro' . $i);
