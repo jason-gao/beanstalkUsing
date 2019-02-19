@@ -19,3 +19,14 @@
 # phpunit
 [phpunit](https://phpunit.readthedocs.io/zh_CN/latest/)
 
+
+# 功能
+- 支持队列各种操作
+## 监控
+- 支持指定频率监控，指定队列监控，指定通知频率，指定通知人，队列最大阈值
+
+# todo
+- 支持配置单个队列监控频率，指定通知频率，通知人，队列阈值
+
+
+
