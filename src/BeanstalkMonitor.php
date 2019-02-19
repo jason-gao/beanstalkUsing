@@ -64,15 +64,15 @@ abstract class BeanstalkMonitor
 
             foreach ($status as $tube => $ts) {
                 if (count($ts) == $buffer) {
-                    if ($ts[1]['current-jobs-ready'] > $tubeMax) {
-                        if ($ts[1]['current-jobs-ready'] >= $ts[0]['current-jobs-ready']) {
+                    if ($ts[1]['current-jobs-ready'] >= $tubeMax) {
+                        if ($ts[0]['current-jobs-ready'] > 0 && ($ts[1]['current-jobs-ready'] >= $ts[0]['current-jobs-ready'])) {
                             $this->log('alert', $dividingLine);
                             $this->log('alert', "tube:$tube");
                             $this->log('alert', "0 current-jobs-ready:" . $ts[0]['current-jobs-ready']);
                             $this->log('alert', "1 current-jobs-ready:" . $ts[1]['current-jobs-ready']);
                             //发送通知
                             if (!isset($notice[$tube]) || (time() - $notice[$tube]) > $noticeFrequency) {
-                                Log::getInstance()->alert("send notice");
+                                $this->log('alert', "send notice");
                                 $this->sendNotice([
                                     'tube'                => $tube,
                                     'current-jobs-ready0' => $ts[0]['current-jobs-ready'],

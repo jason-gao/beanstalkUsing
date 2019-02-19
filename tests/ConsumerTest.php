@@ -24,7 +24,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @test
+     *
      */
     public function deleteAllJob()
     {
@@ -60,7 +60,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *
+     * @test
      */
     public function monitorImpl()
     {
@@ -68,8 +68,8 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
             'host' => 'test.yundun.com'
         ];
         $monitorConf       = [
-            'frequency'       => 10,
-            'tubeMax'         => 100,
+            'frequency'       => 3,
+            'tubeMax'         => 1,
             'noticeFrequency' => 600,
             'monitor'         => ['default', 'test-pro1', 'test-pro2'],
             'log'             => true,
